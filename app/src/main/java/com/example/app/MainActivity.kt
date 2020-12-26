@@ -7,9 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app.entity.User
+import com.example.app.entity.verify
 import com.example.app.widget.CodeView
 import com.example.core.utils.CacheUtils
-import com.example.core.utils.Utils
 import com.example.lesson.LessonActivity
 
 /**
@@ -56,27 +56,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val user = User(username, password, code)
 
-        if (verify(user)) {
+        if (user.verify()) {
             CacheUtils.save(usernameKey, username)
             CacheUtils.save(passwordKey, password)
             this.startActivity(Intent(this, LessonActivity::class.java))
         }
     }
 
-    private fun verify(user: User): Boolean {
-        if (user.username == null || user.username.length < 4) {
-            Utils.toast("用户名太短")
-            return false
-        }
-        if (user.password == null || user.password.length < 4) {
-            Utils.toast("密码太短")
-            return false
-        }
-        if (user.code == null || user.code.length < 4) {
-            Utils.toast("验证码太短")
-            return false
-        }
-
-        return true
-    }
 }
