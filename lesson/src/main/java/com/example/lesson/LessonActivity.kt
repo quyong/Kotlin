@@ -18,7 +18,9 @@ import com.example.lesson.entity.Lesson
  */
 class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.OnMenuItemClickListener {
 
-    override fun getPresenter(): LessonPresenter = LessonPresenter(this)
+    private val lessonPresenter = LessonPresenter(this)
+
+    override fun getPresenter(): LessonPresenter = lessonPresenter
 
     private val lessonAdapter: LessonAdapter = LessonAdapter()
 

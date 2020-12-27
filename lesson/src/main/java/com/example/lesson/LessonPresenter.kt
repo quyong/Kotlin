@@ -15,12 +15,12 @@ class LessonPresenter(var activity: LessonActivity) {
         const val LESSON_PATH = "lessons"
     }
 
-    private lateinit var lessons: List<Lesson>
+    private var lessons: List<Lesson> = arrayListOf()
 
-    private val type: Type by lazy { object : TypeToken<List<Lesson>>() {}.type };
+    private val type: Type = object : TypeToken<List<Lesson>>() {}.type
 
     fun fetchData() {
-        HttpClient.get<List<Lesson>>(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
+        HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
             override fun onSuccess(lessons: List<Lesson>) {
                 this@LessonPresenter.lessons = lessons
                 activity.runOnUiThread { activity.showResult(lessons) }
@@ -33,12 +33,7 @@ class LessonPresenter(var activity: LessonActivity) {
     }
 
     fun showPlayback() {
-        val playbackLessons: ArrayList<Lesson> = arrayListOf<Lesson>();
-        for (lesson in lessons) {
-            if (lesson.state == Lesson.State.PLAYBACK) {
-                playbackLessons += lesson
-            }
-        }
+        val playbackLessons = lessons.filter { it.state == Lesson.State.PLAYBACK }
         activity.showResult(playbackLessons);
     }
 }
