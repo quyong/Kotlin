@@ -14,7 +14,6 @@ class Utils {
 
         fun dp2px(dp: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
 
-        @JvmStatic
         fun toast(string: String) {
             fun toast(string: String, duration: Int) {
                 Toast.makeText(BaseApplication.currentApplication(), string, duration).show();

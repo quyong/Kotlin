@@ -17,7 +17,8 @@ import java.util.*
  */
 class CodeView constructor(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
     private val paint = Paint()
-    private val codeArray = arrayOf("kotlin",
+    private val codeArray = arrayOf(
+            "kotlin",
             "android",
             "java",
             "http",
