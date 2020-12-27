@@ -15,7 +15,7 @@ import com.example.lesson.LessonActivity
 /**
  * Created by QUYONG on 12/25/20
  */
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     private val usernameKey = "username"
     private val passwordKey = "password"
 
@@ -36,17 +36,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val btn_login = findViewById<Button>(R.id.btn_login)
         val img_code = findViewById<CodeView>(R.id.code_view)
-
-        btn_login.setOnClickListener(this)
-        img_code.setOnClickListener(this)
-
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            is CodeView -> v.updateCode()
-            is Button -> this.login()
+        val clickListener = View.OnClickListener { v ->
+            when (v) {
+                is CodeView -> v.updateCode()
+                is Button -> this.login()
+            }
         }
+        btn_login.setOnClickListener(clickListener)
+        img_code.setOnClickListener(clickListener)
+
     }
 
     private fun login() {

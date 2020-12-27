@@ -5,7 +5,7 @@ import com.example.core.utils.Utils
 /**
  * Created by QUYONG on 12/26/20
  */
-class User(var username: String, var password: String, var code: String)
+data class User(var username: String, var password: String, var code: String)
 
 fun User.verify(): Boolean = when {
     (username == null || username.length < 4) -> {

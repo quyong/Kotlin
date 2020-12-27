@@ -15,11 +15,21 @@ import java.util.*
 /**
  * Created by QUYONG on 12/26/20
  */
-class CodeView : AppCompatTextView {
+class CodeView constructor(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
+    private val paint = Paint()
+    private val codeArray = arrayOf("kotlin",
+            "android",
+            "java",
+            "http",
+            "https",
+            "okhttp",
+            "retrofit",
+            "tcp/ip")
+
     constructor(context: Context) : this(context, null) {
     }
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+    init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
@@ -33,21 +43,9 @@ class CodeView : AppCompatTextView {
         updateCode();
     }
 
-    private val paint = Paint()
-
-    private val codeList = arrayListOf("kotlin",
-            "android",
-            "java",
-            "http",
-            "https",
-            "okhttp",
-            "retrofit",
-            "tcp/ip")
-
     fun updateCode() {
-        val random = Random().nextInt(codeList.size);
-        val code = codeList[random]
-        text = code
+        val random = Random().nextInt(codeArray.size);
+        text = codeArray[random]
     }
 
     override fun onDraw(canvas: Canvas?) {
