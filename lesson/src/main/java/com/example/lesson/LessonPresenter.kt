@@ -2,7 +2,7 @@ package com.example.lesson
 
 import com.example.core.http.EntityCallback
 import com.example.core.http.HttpClient
-import com.example.core.utils.Utils.Companion.toast
+import com.example.core.utils.Utils
 import com.example.lesson.entity.Lesson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -27,7 +27,7 @@ class LessonPresenter(var activity: LessonActivity) {
             }
 
             override fun onFailure(message: String?) {
-                activity.runOnUiThread { toast(message!!) }
+                activity.runOnUiThread { Utils.toast(message!!) }
             }
         })
     }

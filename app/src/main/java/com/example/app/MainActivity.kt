@@ -36,15 +36,14 @@ class MainActivity : AppCompatActivity() {
 
         val btn_login = findViewById<Button>(R.id.btn_login)
         val img_code = findViewById<CodeView>(R.id.code_view)
-        val clickListener = View.OnClickListener { v ->
-            when (v) {
-                is CodeView -> v.updateCode()
+        val clickListener = View.OnClickListener {
+            when (it) {
+                is CodeView -> it.updateCode()
                 is Button -> this.login()
             }
         }
         btn_login.setOnClickListener(clickListener)
         img_code.setOnClickListener(clickListener)
-
     }
 
     private fun login() {

@@ -8,17 +8,13 @@ import com.example.core.BaseApplication
 /**
  * Created by QUYONG on 12/27/20
  */
-class Utils {
-    companion object {
-        private val displayMetrics = Resources.getSystem().displayMetrics
 
-        fun dp2px(dp: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
+private val displayMetrics = Resources.getSystem().displayMetrics
+fun Float.dp2px(): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, displayMetrics)
 
-        fun toast(string: String) {
-            fun toast(string: String, duration: Int) {
-                Toast.makeText(BaseApplication.currentApplication(), string, duration).show();
-            }
-            toast(string, Toast.LENGTH_SHORT);
-        }
+object Utils {
+    fun toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(BaseApplication.currentApplication, string, duration).show();
     }
 }
+

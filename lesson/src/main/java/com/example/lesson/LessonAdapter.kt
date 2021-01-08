@@ -40,7 +40,7 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
             fun onCreate(parent: ViewGroup): LessonViewHolder {
                 return LessonViewHolder(LayoutInflater
                         .from(parent.context)
-                        .inflate(R.layout.item_lesson, parent, false));
+                        .inflate(R.layout.item_lesson, parent, false))
             }
         }
 
@@ -49,21 +49,17 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
             setText(R.id.tv_date, date);
             setText(R.id.tv_content, lesson.content)
 
-            val state: Lesson.State = lesson.state;
+            val state: Lesson.State = lesson.state
 
             state?.let {
-                setText(R.id.tv_state, state.stateName());
+                setText(R.id.tv_state, state.stateName())
                 val colorRes = when (state) {
-                    Lesson.State.PLAYBACK -> {
-                        R.color.playback
-                    }
-                    Lesson.State.LIVE ->
-                        R.color.live
-                    Lesson.State.WAIT ->
-                        R.color.wait
+                    Lesson.State.PLAYBACK -> R.color.playback
+                    Lesson.State.LIVE -> R.color.live
+                    Lesson.State.WAIT -> R.color.wait
                 }
-                val backgroundColor: Int = itemView.context.getColor(colorRes);
-                (getView<TextView>(R.id.tv_state) as? TextView)?.setBackgroundColor(backgroundColor);
+                val backgroundColor: Int = itemView.context.getColor(colorRes)
+                getView<TextView>(R.id.tv_state)?.setBackgroundColor(backgroundColor)
             }
 
         }

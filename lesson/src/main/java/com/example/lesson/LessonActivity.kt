@@ -18,9 +18,9 @@ import com.example.lesson.entity.Lesson
  */
 class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.OnMenuItemClickListener {
 
-    private val lessonPresenter = LessonPresenter(this)
-
-    override fun getPresenter(): LessonPresenter = lessonPresenter
+    override val lessonPresenter by lazy {
+        LessonPresenter(this)
+    }
 
     private val lessonAdapter: LessonAdapter = LessonAdapter()
 
@@ -28,20 +28,20 @@ class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.O
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson);
-        val toolbar: Toolbar = findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.menu_lesson);
-        toolbar.setOnMenuItemClickListener(this);
+        setContentView(R.layout.activity_lesson)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.inflateMenu(R.menu.menu_lesson)
+        toolbar.setOnMenuItemClickListener(this)
 
-        val recyclerView: RecyclerView = findViewById(R.id.list);
-        recyclerView.layoutManager = LinearLayoutManager(this);
-        recyclerView.adapter = lessonAdapter;
+        val recyclerView: RecyclerView = findViewById(R.id.list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = lessonAdapter
         recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
 
         refreshLayout = findViewById(R.id.swipe_refresh_layout)
-        refreshLayout.setOnRefreshListener { getPresenter().fetchData() }
+        refreshLayout.setOnRefreshListener { lessonPresenter.fetchData() }
         refreshLayout.isRefreshing = true;
-        getPresenter().fetchData()
+        lessonPresenter.fetchData()
     }
 
     fun showResult(lessons: List<Lesson>) {
@@ -50,7 +50,7 @@ class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.O
     }
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
-        getPresenter().showPlayback()
-        return false;
+        lessonPresenter.showPlayback()
+        return false
     }
 }
